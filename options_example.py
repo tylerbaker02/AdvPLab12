@@ -3,7 +3,7 @@ from pprint import pprint
 
 # Modify this to only include the steps you have written so far
 # It will include simplified examples that use features of each step
-steps_to_run = [1, 2, 3, 4, 5, 6]
+steps_to_run = [1, 2, 3]
 
 
 if 1 in steps_to_run:

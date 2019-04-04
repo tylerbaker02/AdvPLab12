@@ -19,7 +19,29 @@ assignment may, for the purpose of assessing this assignment:
 class Options(dict):
     """Store and retrieve options for a web server"""
 
-    def __init__(self, *options):
-        super().__init__(self)
-        for option in options:
-            enable(option)
+    def __init__(self, *args, **kwargs):
+        super().__init__(kwargs)
+        for arg in args:
+            if isinstance(arg, str):
+                self[arg] = True
+            else:
+                raise TypeError("Expected String")
+
+    def __getitem__(self, item):
+        try:
+            return super().__getitem__(item)
+        except KeyError:
+            return False
+
+    def __getattr__(self, item):
+        pass
+
+    def __setitem__(self, key, value):
+        pass
+
+    def __setattr__(self, key, value):
+        pass
+
+    def __delattr__(self, item):
+        pass
+
