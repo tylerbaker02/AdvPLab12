@@ -1,4 +1,4 @@
-"""DESCRIPTION OF THE MODULE GOES HERE TODO
+"""Extend the Dictionary Class to store and retrieve options.
 
 Author: Tyler Baker
 Class: CSI-260-01
@@ -17,31 +17,36 @@ assignment may, for the purpose of assessing this assignment:
 
 
 class Options(dict):
-    """Store and retrieve options for a web server"""
+    """Store and retrieve options for a web server."""
 
     def __init__(self, *args, **kwargs):
+        """Initialize the options."""
         super().__init__(kwargs)
         for arg in args:
-            if isinstance(arg, str):
-                self[arg] = True
-            else:
-                raise TypeError("Expected String")
+            self[arg] = True
 
     def __getitem__(self, item):
+        """Retrieve an item using bracket notation."""
         try:
             return super().__getitem__(item)
         except KeyError:
             return False
 
     def __getattr__(self, item):
-        pass
+        """Retrieve an item using attribute notation."""
+        return self.__getitem__(item)
 
     def __setitem__(self, key, value):
-        pass
+        """Set an item using bracket notation."""
+        if isinstance(key, str):
+            self.update({key: value})
+        else:
+            raise TypeError("Expected String")
 
     def __setattr__(self, key, value):
-        pass
+        """Set an item using attribute notation."""
+        self.__setitem__(key, value)
 
     def __delattr__(self, item):
-        pass
-
+        """Delete an attribute from the dictionary."""
+        super().__delitem__(item)
